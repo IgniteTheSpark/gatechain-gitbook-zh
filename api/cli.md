@@ -1805,9 +1805,10 @@ gatecli tx send [recipient account] [amount] --from [sender account] --fees [tx 
 | tx fees | String | 交易费用（例如100000NANOGT） |
 | chain-id | String | 链 ID |
 
+
 **示例**
 ```bash
-gatecli tx send gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
+gatecli tx send gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet 
 ```
 
 **响应示例**
@@ -2123,6 +2124,66 @@ gatecli tx encode tx_sign.json
 ```
 vAG5zc/tCmrcKqCFCihsMW8nyzNx64qObCAcke6mSXd4kqmHiPdDq6q4lEW1aDPq6/iNJOhUEihVZVapclvx5gwUyOs1WgQNIlRZij2GOBM0JtRFbTTNmIVD08kb3a7iGhAKBk5BTk9HVBIGMTAwMDAwEhIKDAoGTkFOT0dUEgIxMRDAmgwaMHZI3vYAiiIVpsyR/xtwvbu9zTfr0vxZUmT7lhu3unO0lOsHGyPZ3GqlJ9La3c5L7DIEoAboBw==
 ```
+
+### 8. 预估gas
+
+**命令**
+```bash
+gatecli tx send [recipient account] [amount] --from [sender account]  --chain-id [chain ID] ----dry-run --gas-adjustment [value]
+```
+
+**参数**
+
+| 参数 | 类型 | 描述 |
+|------|------|------|
+| recipient account | String | 接收者账户地址 |
+| amount | String | 转账金额 |
+| sender account | String | 发送者账户地址 |
+| chain-id | String | 链 ID |
+| gas-adjustment  | float | 预估系数 |
+
+**示例**
+```bash
+gatecli tx send gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq  --chain-id testnet --dry-run --gas-adjustment 1.4
+```
+
+**响应示例**
+```
+gas estimate: 71349
+```
+### 9. 根据预估gas发送交易
+
+**命令**
+```bash
+gatecli tx send [recipient account] [amount] --from [sender account] --fees [tx fees] --gas [gaslimit] --chain-id [chain ID]
+```
+
+**参数**
+
+| 参数 | 类型 | 描述 |
+|------|------|------|
+| recipient account | String | 接收者账户地址 |
+| amount | String | 转账金额 |
+| sender account | String | 发送者账户地址 |
+| tx fees | String | 交易费用（例如100000NANOGT） |
+| gas| String | gaslimit |
+| chain-id | String | 链 ID |
+
+**示例**
+```bash
+gatecli tx send gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 713490NANOGT --gas 71349 --chain-id testnet 
+```
+
+**响应示例**
+```
+Response:
+  TxHash: IRREVOCABLEPAY-2C8F3C621A31CC84D11FAE2F3CA3F2A9315F0BBCC6EC4D17FA76920E0957B43ECC488C51952BDB592249D64E575AB02E
+  Data: ngK5zc/tCl7cKqCFCiiJ3719mjDKkN+wByfBhTyFH31nlWIIfDLjF0nFlNa8uKExO8jRNFKBEhQ/qxhGItwZthCTSblIEUk78qRTYhoYCgZOQU5PR1QSDjEwMDAwMDAwMDAwMDAwEhYKEAoGTkFOT0dUEgY3MTM0OTAQta0EGjAAFFGQ8fF+ak+aFnmJafU2/01YaB5viwFYTYsrDuDBfau8+rUyHdtO9D4tLA/4e84iaQol4eGg+iBx0YPKICxemJ0xaakoVkgfJ8HG4FOYs1WKjCM5QPA1aBJA9I57PDH02c8vd1VpQvfiEqNkCXH5crGvPMos/zzj/SfNJTlcqJjl/Hu0Wawh65A/yUCHqo9fvZBbQDA3foGPCzIDFOYB
+  Raw Log: sync broadcast tx success
+```
+**注释**
+- gasprice=fees/gas，gasprice必须大于basefee, gas 默认值为200000
+- basefee 可以通过evm rpc eth_getBlockByNumber方法查询
 
 
 ## 保险账户

@@ -2182,7 +2182,7 @@ Response:
   Raw Log: sync broadcast tx success
 ```
 **注释**
-- fees 必须大于basefee，默认为 200000
+- gasprice=fees/gas，gasprice必须大于basefee, gas 默认值为200000
 - basefee 可以通过evm rpc eth_getBlockByNumber方法查询
 
 

@@ -1804,10 +1804,11 @@ gatecli tx send [recipient account] [amount] --from [sender account] --fees [tx 
 | sender account | String | 发送者账户地址 |
 | tx fees | String | 交易费用（例如100000NANOGT） |
 | chain-id | String | 链 ID |
+| gas| uint | gas上线 |
 
 **示例**
 ```bash
-gatecli tx send gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
+gatecli tx send gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet --gas 300000
 ```
 
 **响应示例**

@@ -1,0 +1,5 @@
+# What is Gate Layer
+
+The Gate Layer network is a high-performance Layer 2 built on the Optimism OP Stack, fully compatible with the Ethereum Virtual Machine (EVM). It leverages GateChain as its secure settlement layer, backed by GT staking, and integrates native Blob-based data availability to provide scalable, reliable, and cost-efficient infrastructure. With optimized parameters, GateLayer achieves over 5,700 TPS and ultra-low transaction fees, delivering both speed and affordability without compromising security.
+
+GateLayer is designed to power a diverse range of decentralized applications—from meme ecosystems and perpetual exchanges to gaming, DeFi, and social platforms. Developers benefit from an open, permissionless environment and a familiar EVM toolchain, while users experience seamless, low-cost transactions. Through LayerZero integration, GateLayer also enables native interoperability across multiple blockchains, extending its reach beyond a single ecosystem and unlocking broader possibilities for cross-chain innovation.

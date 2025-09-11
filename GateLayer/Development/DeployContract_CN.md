@@ -1,4 +1,4 @@
-# 部署智能合约 (Deploying a Smart Contract)
+# 部署智能合约
 
 由于 Gate Layer 是完全 EVM 等效的，开发者可以继续使用他们所熟悉的以太坊全套工具链（如 Hardhat, Foundry, Remix, Ethers.js, Web3.js 等）来开发和部署智能合约，几乎无需任何代码修改。
 

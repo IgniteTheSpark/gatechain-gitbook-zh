@@ -1,4 +1,4 @@
-# Rollup 工作原理 (Rollup Overview)
+# Rollup 工作原理
 
 ## 什么是 Rollup？
 

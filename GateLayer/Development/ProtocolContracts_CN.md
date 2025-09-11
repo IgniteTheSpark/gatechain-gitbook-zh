@@ -1,4 +1,4 @@
-# 协议合约地址 (Protocol Contracts)
+# 协议合约地址
 
 本文档列出了 Gate Layer 部署在 GateChain (L1) 上的核心协议智能合约地址。这些合约共同构成了 Gate Layer 系统的基础。
 

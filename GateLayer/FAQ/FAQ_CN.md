@@ -1,4 +1,4 @@
-# 常见问题 (FAQ)
+# 常见问题
 
 ### 什么是 Gate Layer？
 GateLayer 是一个基于 Optimism OP Stack 构建的高性能 Layer 2 网络。它完全兼容 EVM，由 GateChain 作为结算层提供安全保障，并为低成本、高速度的交易进行了优化。

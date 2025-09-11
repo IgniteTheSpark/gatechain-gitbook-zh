@@ -89,3 +89,31 @@ sequenceDiagram
 
     GC-->>U: Finalized status (withdrawals / messages can be proved)
 ```
+
+---
+
+## Component Interaction Diagram
+
+```mermaid
+graph TD
+    subgraph "Layer 1"
+        L1_Chain["GateChain (Data Availability Layer)"]
+    end
+
+    subgraph "Layer 2"
+        Challengers
+        Nodes
+        Users
+        Sequencers
+    end
+
+    %% L2 Internal Flows
+    Users -- "Submit transactions<br/>Query data (e.g. block explorers)" --> Nodes
+    Nodes -- "P2P Realtime Updates" --> Sequencers
+    
+    %% L2 <--> L1 Flows
+    Users -- "Submit deposits" --> L1_Chain
+    Sequencers -- "Submit batches and assertions" --> L1_Chain
+    Nodes -- "Get safe transactions<br/>and blocks" --> L1_Chain
+    Challengers -- "Verify block hash assertions<br/>Submit fault proofs" --> L1_Chain
+```

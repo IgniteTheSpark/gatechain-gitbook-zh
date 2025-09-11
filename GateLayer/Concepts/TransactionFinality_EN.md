@@ -13,15 +13,15 @@ Transactions on Gate Layer go through the following steps to reach finality:
 1.  **`unsafe` State**: 
     After a user submits a transaction, the Sequencer immediately processes it and includes it in an L2 block. At this point, the transaction data exists only on the Sequencer and has not been posted to GateChain.
 
-2.  **`safe` State**: 
-    The Sequencer posts the block containing the transaction data as a `blob` to GateChain. Once the data is successfully included in a GateChain block, the transaction reaches the `safe` state.
+2.  **`safe` state**: 
+    The Sequencer posts a block containing the transaction data as a `blob` to GateChain. Once this data is included in a GateChain block, the transaction reaches the `safe` state. Since GateChain blocks have instant finality, the data is theoretically irreversible at this point.
 
-3.  **`finalized` State**: 
-    The L2 transaction becomes final once the GateChain block containing its data is finalized.
+3.  **`finalized` state**: 
+    To provide an additional layer of security and align with industry best practices, Gate Layer's design requires that after a GateChain block containing L2 transaction data is confirmed, an additional **10** new GateChain blocks must be successfully produced. Only then is the L2 transaction officially considered `finalized`.
 
-> **Key Confirmation: Wait for 10 Blocks**
-> In Gate Layer's design, a GateChain block that contains L2 transaction data is considered final after **10 new** GateChain blocks have been successfully built on top of it. This means your L2 transaction has become irreversible at this point.
+> **Key Confirmation: A 10-Block Safety Buffer**
+> This design ensures the highest level of irreversibility for L2 transactions under any extreme network conditions, providing a robust security foundation for high-value applications like cross-chain bridge withdrawals.
 
 ## Conclusion
 
-Gate Layer's transaction finality is tightly coupled with its L1, GateChain. Once the GateChain block containing your transaction data has received **10 block confirmations**, you can be confident that your L2 transaction is finalized and irreversible.
+The transaction finality model of Gate Layer is tightly coupled with its L1, GateChain. Once the GateChain block containing your transaction data has received **10 block confirmations**, you can be confident that the L2 transaction is finalized and irreversible.

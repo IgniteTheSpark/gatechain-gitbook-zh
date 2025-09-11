@@ -26,12 +26,12 @@ The `op-batcher` posts the compressed data to **GateChain (L1)**. Thanks to Gate
 An L2 transaction goes through three states before it is finalized:
 
 *   **`unsafe`**: The transaction has been processed by the L2 Sequencer, but its data has not yet been posted to GateChain. It is called "unsafe" because the transaction data only exists on the Sequencer and has not yet been posted to L1. If the Sequencer reorganizes at this stage, the transaction could be reordered or even dropped.
-*   **`safe`**: The transaction data has been batched and successfully posted as a `blob` to a GateChain block. At this point, the transaction data is securely recorded on L1. Since GateChain does not experience re-organizations, data in a `safe` state will not be lost, but it must await L1 finality to become `finalized`.
-*   **`finalized`**: The GateChain block containing the transaction data is old enough to have reached finality on GateChain. Once a transaction reaches the `finalized` state, it is irreversible.
+*   **`safe`**: The transaction data has been batched and successfully published as a `blob` to a GateChain block. At this point, the data is securely recorded on L1. Since GateChain does not undergo reorgs, the data in a `safe` state will not be lost, but it must wait for the finality period defined by the L2 protocol.
+*   **`finalized`**: After the GateChain block containing the L2 transaction data is produced, the Gate Layer system waits for an additional 10 GateChain blocks to be confirmed. Once this L2-enforced security waiting period is over, the transaction reaches the `finalized` state and is considered completely irreversible.
 
 ### 3. State Processing
 
-This stage is divided into two steps:
+This phase is divided into two steps:
 
 #### State Changes
 

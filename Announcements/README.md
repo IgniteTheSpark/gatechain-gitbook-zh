@@ -31,7 +31,7 @@ GateChain 共识版本将升级至 v1.20，核心是新增对 Blob 交易（EIP-
 
 #### 3. RPC 接口改进
 - 新增与 Blob 交易相关的 RPC 接口。
-- 优化 `eth_hashrate` 返回值。
+- 调整及优化 `eth_hash` 返回值。
 
 ### 重要提示
 

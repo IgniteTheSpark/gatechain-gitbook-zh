@@ -200,8 +200,10 @@ tail -f ~/.gatechain_docker/logs/rest.log
 gated start
 ```
 
-### GC 模式启动
-要在 GC 模式下启动，修改启动命令：
+### 存档节点模式 (禁用修剪)
+此模式将禁用区块修剪功能，节点将保留从创世区块以来的所有历史状态和区块数据。这对于需要查询任意历史状态的应用或服务（如区块浏览器）非常有用，但会占用大量磁盘空间。
+
+要在存档模式下启动，请使用以下命令：
 ```bash
 gated start --pruning nothing
 ```
@@ -210,6 +212,7 @@ gated start --pruning nothing
 ```bash
 gatecli evm rest-server --gm-websocket-port http://127.0.0.1:8085 --chain-id mainnet --laddr tcp://0.0.0.0:6060 --rpc-api web3,eth,personal,net,debug
 ```
+注： 若要支持EIP1599 之前的交易， EVM RPC Server 启动时请增加 allow-unprotected-txs 参数
 
 对于 EVM RPC 支持，修改 config.json 中的以下属性：
 ```json

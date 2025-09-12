@@ -94,6 +94,12 @@ sequenceDiagram
 
 ## Component Interaction Diagram
 
+*Note: For the best display quality, we recommend using the SVG version below.*
+![GateLayer Component Interaction](gatechain-component-interaction.svg)
+
+<details>
+<summary>Mermaid Source</summary>
+
 ```mermaid
 graph TD
     subgraph "Layer 1"
@@ -117,3 +123,4 @@ graph TD
     Nodes -- "Get safe transactions<br/>and blocks" --> L1_Chain
     Challengers -- "Verify block hash assertions<br/>Submit fault proofs" --> L1_Chain
 ```
+</details>

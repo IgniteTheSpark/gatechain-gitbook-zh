@@ -33,7 +33,7 @@ totalFee = l2ExecutionFee + l1DataFee + operatorFee
 
 *   **L1 数据费**: 
     ```math
-    l1DataFee = estimatedSizeScaled * (baseFeeScalar * l1BaseFee * 16 + blobFeeScalar * l1BlobBaseFee) / 10^{12}
+    l1DataFee = estimatedSizeScaled * l1FeeScaled / 10^{12}
     ```
 
 *   **运营费**: 
@@ -71,13 +71,13 @@ Gate Layer 集成了 Fjord 升级中的 **FastLZ 压缩估算器**，能够更�
     *   `l1BaseFee`: GateChain (L1) 的当前基础费。
     *   `l1BlobBaseFee`: GateChain (L1) 的当前 Blob 基础费。
     *   `baseFeeScalar` 和 `blobFeeScalar`: 用于调节费用的链配置参数。
+        *   **当前 Gate Layer 参数设置**: `baseFeeScalar` = `1368`, `blobFeeScalar` = `810949`。
 
 3.  **计算最终 L1 数据费**：
     将前两步的结果相乘并进行缩放，得到最终的 `l1DataFee`。
-
-**当前 Gate Layer 参数设置**:
-*   `baseFeeScalar`: `0.001368`
-*   `blobFeeScalar`: `0.810949`
+    ```math
+    l1DataFee = estimatedSizeScaled * l1FeeScaled / 10^{12}
+    ```
 
 ### 运营费
 

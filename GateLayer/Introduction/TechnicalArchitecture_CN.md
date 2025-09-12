@@ -94,6 +94,12 @@ sequenceDiagram
 
 ## 组件交互图
 
+*请注意：为保证最佳显示效果，建议使用下方 SVG 版本。*
+![GateLayer Component Interaction](gatelayer-component-interaction.svg)
+
+<details>
+<summary>Mermaid 源码</summary>
+
 ```mermaid
 graph TD
     subgraph "Layer 1"
@@ -117,3 +123,4 @@ graph TD
     Nodes -- "Get safe transactions<br/>and blocks" --> L1_Chain
     Challengers -- "Verify block hash assertions<br/>Submit fault proofs" --> L1_Chain
 ```
+</details>

@@ -261,3 +261,4 @@ Please download and upgrade to the latest version promptly to prevent consensus 
 ### Overview
 
 GateChain is a next-generation public chain focused on on-chain asset security and decentralized trading. With its uniquely designed vault account, GateChain provides a remarkable clearing mechanism for handling abnormal transactions, addressing the challenges of asset theft and private key loss. It will also support core functions such as decentralized trading and cross-chain transfers.
+

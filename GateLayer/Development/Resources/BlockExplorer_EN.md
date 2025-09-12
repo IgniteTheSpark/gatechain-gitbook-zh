@@ -8,3 +8,4 @@ Gate Layer uses GateScan (a customized fork of Blockscout) as its official block
 | :--- | :--- | :--- |
 | Gate Layer Mainnet | `TBD` | Not Live |
 | Gate Layer Testnet | `TBD` | Not Live |
+

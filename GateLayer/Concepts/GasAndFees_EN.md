@@ -61,23 +61,23 @@ The calculation process is as follows:
     ```math
     estimatedSizeScaled = max(minTxSize * 10^6, intercept + fastlzCoef * fastlzSize)
     ```
-    *   `fastlzSize`: The actual size of the signed transaction after FastLZ compression.
-    *   `intercept` and `fastlzCoef`: Model parameters inherited from OP-Stack.
+    *   `fastlzSize`: The actual size of the transaction after FastLZ compression post-signing.
+    *   `intercept` and `fastlzCoef`: Model parameters inherited from the OP-Stack.
 
 2.  **Calculate the weighted gas price multiplier**:
     ```math
     l1FeeScaled = baseFeeScalar * l1BaseFee * 16 + blobFeeScalar * l1BlobBaseFee
     ```
-    *   `l1BaseFee`: The current base fee on GateChain (L1).
-    *   `l1BlobBaseFee`: The current Blob Base Fee on GateChain (L1).
-    *   `baseFeeScalar` and `blobFeeScalar`: Chain configuration parameters used to scale the fees.
+    *   `l1BaseFee`: The current base fee of GateChain (L1).
+    *   `l1BlobBaseFee`: The current blob base fee of GateChain (L1).
+    *   `baseFeeScalar` and `blobFeeScalar`: Chain configuration parameters used to adjust the fee.
+        *   **Current Gate Layer Parameter Settings**: `baseFeeScalar` = `1368`, `blobFeeScalar` = `810949`.
 
-3.  **Calculate the final L1 Data Fee**:
-    The final `l1DataFee` is derived by multiplying the results from the first two steps and scaling the result.
-
-**Current Gate Layer Parameters**:
-*   `baseFeeScalar`: `0.001368`
-*   `blobFeeScalar`: `0.810949`
+3.  **Calculate the final L1 data fee**:
+    The results from the first two steps are multiplied and scaled to get the final `l1DataFee`.
+    ```math
+    l1DataFee = estimatedSizeScaled * l1FeeScaled / 10^{12}
+    ```
 
 ### Operator Fee
 

@@ -3,42 +3,6 @@
 Get the latest updates from the GateChain team.
 
 ---
-## GateChain Mainnet Upgrade v1.1.9 & v1.2.0 (Cancun & EIP-4844) (2025-09-13)
-
-### Overview
-
-The GateChain consensus version will be upgraded to v1.2.0, with the core feature being the addition of support for Blob transactions (EIP-4844). This will provide low-cost data availability for L2 solutions like Gate Layer. All nodes participating in consensus must upgrade their node binaries.
-
-### Changelog
-
-#### 1. Core Upgrades
-- **GateChain Version Upgrade**: The block version number is upgraded to v20.
-- **EVM Version Upgrade**: The EVM is upgraded to the Cancun version, introducing several of Ethereum's latest improvements.
-- **EIP-4844 Compatibility**: Support for Shard Blob Transactions (Proto-Danksharding), adding a new Blob transaction type and a related gas fee mechanism to lay the foundation for L2 data storage and transaction optimization.
-
-#### 2. EIP Compatibility Updates
-- **EIP-1153**: Introduces transient storage opcodes to optimize temporary data handling in transactions.
-- **EIP-2565**: Reduces the gas cost of the ModExp operation, improving the efficiency of large number arithmetic.
-- **EIP-2929**: Increases the gas cost of state-access opcodes (like SLOAD) to enhance on-chain security.
-- **EIP-2930**: Adds optional access lists to optimize transaction gas calculations.
-- **EIP-3198**: Returns the block `BASEFEE`, facilitating transaction fee calculation and smart contract optimization.
-- **EIP-3529**: Reduces gas refunds for EVM operations to improve the rationality of the fee model.
-- **EIP-3541**: Prohibits deploying contract bytecode starting with `0xEF` to enhance contract security.
-- **EIP-3651**: Warms up the `COINBASE` address to optimize block reward payments and gas consumption.
-- **EIP-3855**: Adds the `PUSH0` instruction to save bytecode space and gas.
-- **EIP-3860**: Limits and meters the size of contract `initcode` to prevent attacks from oversized contracts.
-- **EIP-5656**: Adds the `MCOPY` memory copying instruction to improve EVM memory operation efficiency.
-- **EIP-6780**: Restricts `SELFDESTRUCT` to be called only within the same transaction, enhancing the predictability of contract execution.
-
-#### 3. RPC Interface Improvements
-- Added new RPC interfaces related to Blob transactions.
-- Adjusted and optimized the `eth_hash` return value.
-
-### Important Notice
-
-Please download and upgrade to the latest version promptly to prevent consensus accounts from being disconnected.
-
----
 ## GateChain Mainnet Upgrade v1.1.8 (2025-08-20)
 
 ### Overview
@@ -47,7 +11,6 @@ GateChain completed the mainnet upgrade to v1.1.8 on August 20, 2025, at 10:00 (
 
 ### Changelog
 
-- **GateChain Version Upgrade**: The block version number is upgraded to v18.
 - **Bug Fix**: Fixed an issue where some successful transactions were incorrectly reported as 'out of gas', causing their status to show as 'failed'.
 
 ### Important Notice
@@ -263,4 +226,3 @@ Please download and upgrade to the latest version promptly to prevent consensus 
 ### Overview
 
 GateChain is a next-generation public chain focused on on-chain asset security and decentralized trading. With its uniquely designed vault account, GateChain provides a remarkable clearing mechanism for handling abnormal transactions, addressing the challenges of asset theft and private key loss. It will also support core functions such as decentralized trading and cross-chain transfers.
-

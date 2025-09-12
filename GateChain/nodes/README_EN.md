@@ -1,0 +1,2 @@
+## Overview
+GateChain full node is the core component supporting GateChain's operation. A GateChain "full node" has all the functionalities of GateChain, including building a local GateChain testnet, joining the GateChain public testnet, or joining the GateChain mainnet. It also supports downloading on-chain block data, validating and executing business logic, and monitoring consensus information.

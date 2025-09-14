@@ -9,3 +9,4 @@ The official Gate Layer Bridge allows you to securely transfer assets between Ga
 | Gate Layer Mainnet Bridge | `TBD` | Not Live |
 | Gate Layer Testnet Bridge | `TBD` | Not Live |
 
+

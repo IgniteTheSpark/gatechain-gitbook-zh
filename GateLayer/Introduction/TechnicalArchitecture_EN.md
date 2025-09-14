@@ -2,55 +2,9 @@
 
 ## High-Level Architecture
 
-*Note: The diagram below is in Mermaid format. We recommend using the SVG version you provided for the best display quality.*
-![GateLayer Architecture](gatelayer-architecture.svg)
+The diagram below illustrates the high-level technical architecture of GateLayer, covering the complete flow from user interaction and L2 execution to L1 settlement and data availability. It clearly depicts how core components like the Sequencer, Batcher, and Proposer work in concert with the Rollup contracts and Blob storage on GateChain to ensure the system's security, efficiency, and scalability.
 
-```mermaid
-flowchart TD
-    %% Clients
-    A["Users / Wallets / DApps"] --> B["RPC / JSON-RPC Endpoint"]
-    subgraph L2["GateLayer (OP Stack-based L2)"]
-      B --> C["Sequencer / Executor (EVM)"]
-      C --> D["State DB & Mempool"]
-      C --> E["EIP-1559 Fee Market\n(baseFee + priorityFee)"]
-      C --> F["Logs / Events"]
-      C --> G["Node / Full Node / Archive"]
-      C --> H["Indexer & Explorer"]
-
-      C --> I[Batcher]
-      C --> J[Output Proposer]
-      C --> K["Bridges on L2\n(LayerZero & Ecosystem Bridges)"]
-
-      style L2 fill:#0b1,stroke:#0b1,color:#fff,fill-opacity:0.08
-    end
-
-    subgraph L1["GateChain (Settlement + DA)"]
-      L["Rollup System Contracts\n(canonical bridge / portal)"]
-      M["Blob DA (stores batch data & state roots)"]
-      N["GT Staking Validators / Consensus"]
-      O["Treasury / Governance"]
-      style L1 fill:#08c,stroke:#08c,color:#fff,fill-opacity:0.08
-    end
-
-    %% Posting & Settlement
-    I --> M
-    J --> L
-    L -. finality window / proofs .- J
-    M --> L
-
-    %% Economic/Security
-    N --> L
-    O --> L
-
-    %% Interop
-    P["External Chains\n(Ethereum / BNB / others)"]
-    K <---> P
-
-    %% Read paths
-    H --> A
-    G --> H
-    F --> H
-```
+![GateLayer High-Level Architecture](./gatelayer-architecture.png)
 
 **Key Points of the Diagram**
 
@@ -60,67 +14,22 @@ flowchart TD
 *   **Security & Governance**: Settlement security is provided by **GT staking + the validator network**; governance and the treasury reside on the GateChain side.
 *   **Interoperability**: **LayerZero** and ecosystem bridges are integrated on the L2 side to enable cross-chain asset and message communication.
 *   **Availability & Observability**: Nodes, indexers, and explorers on L2 read Blob/contract information to ensure verifiability and traceability.
+*   **EVM Compatibility & Developer Experience**: The GateLayer core utilizes the EVM execution engine, ensuring full compatibility with Ethereum. Developers can seamlessly migrate DApps and use standard toolchains like Hardhat and Remix.
+*   **Modular Components**: The architecture separates core components: the **Sequencer** handles transaction ordering, the **Batcher** manages data bundling, and the **Proposer** submits state root proposals, enhancing the system's maintainability.
+*   **Unified Interaction Entrypoint**: All on-chain interactions enter through a standard **RPC endpoint**, providing users and developers with an interaction experience consistent with Ethereum.
 
 ---
 
 ## Transaction and Settlement Flow
 
-*Note: The diagram below is in Mermaid format. We recommend using the SVG version you provided for the best display quality.*
-![Rollup Lifecycle](rollup-lifecycle.svg)
+This sequence diagram details the entire lifecycle of an L2 transaction, from submission to final confirmation. It reveals the interaction sequence between the user, Sequencer, Batcher, Proposer, and GateChain (L1), helping to clarify how a transaction's status evolves from `unsafe` to `finalized`.
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant U as User / DApp
-    participant S as GateLayer Sequencer(EVM)
-    participant B as Batcher
-    participant P as Output Proposer
-    participant GC as GateChain (Rollup Contracts + Blob)
-
-    U->>S: Submit L2 tx (gas = baseFee + priorityFee)
-    S->>S: Execute txs, build L2 block, update state root
-    S->>U: Return receipt / near-instant confirmation
-
-    S->>B: Send batch data (txs, traces, roots)
-    B->>GC: Post batch data to Blob (DA)
-
-    P->>GC: Post output root / state root to rollup contracts
-    Note over GC: Finality window / challenge period (per config)
-
-    GC-->>U: Finalized status (withdrawals / messages can be proved)
-```
+![Rollup Lifecycle](./rollup-lifecycle.png)
 
 ---
 
 ## Component Interaction Diagram
 
-*Note: For the best display quality, we recommend using the SVG version below.*
-![GateLayer Component Interaction](gatechain-component-interaction.svg)
+This diagram focuses on the core interactions between different roles in the GateLayer ecosystem (Users, Nodes, Sequencers, Challengers) and the L1 and L2 layers. It simplifies internal complexities to highlight data flow and the division of responsibilities, such as how users submit transactions, how the Sequencer posts data to L1, and how nodes sync information from L1.
 
-<details>
-<summary>Mermaid Source</summary>
-
-```mermaid
-graph TD
-    subgraph "Layer 1"
-        L1_Chain["GateChain (Data Availability Layer)"]
-    end
-
-    subgraph "Layer 2"
-        Challengers
-        Nodes
-        Users
-        Sequencers
-    end
-
-    %% L2 Internal Flows
-    Users -- "Submit transactions<br/>Query data (e.g. block explorers)" --> Nodes
-    Nodes -- "P2P Realtime Updates" --> Sequencers
-    
-    %% L2 <--> L1 Flows
-    Users -- "Submit deposits" --> L1_Chain
-    Sequencers -- "Submit batches and assertions" --> L1_Chain
-    Nodes -- "Get safe transactions<br/>and blocks" --> L1_Chain
-    Challengers -- "Verify block hash assertions<br/>Submit fault proofs" --> L1_Chain
-```
-</details>
+![GateLayer Component Interaction](./gatelayer-component-interaction.png)

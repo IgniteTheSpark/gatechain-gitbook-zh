@@ -45,29 +45,12 @@ Gate Layer 上的一笔交易，从提交到最终确认，其生命周期主要
 
 ### Gate Layer 交易生命周期流程图
 
-```mermaid
-graph LR
-    subgraph "L2 Sequencer / Batcher"
-        A[User submits Tx] --> B{"Sequencer processes Tx<br/>(State: unsafe)"};
-        B --> C[op-batcher collects & compresses Txs];
-    end
+![Gate Layer 交易生命周期流程图](./gatelayer-transaction-lifecycle.png)
 
-    subgraph "L1 GateChain (Data & Consensus)"
-        C --> D{op-batcher posts Tx data as Blob};
-        D --> E["L1 Block includes Blob<br/>(State: safe)"];
-        E --> F((L1 Block Finalized<br/>State: finalized));
-    end
+**图中要点**
 
-    subgraph "L2 State & Proposer"
-        G[L2 Nodes read Blob from L1] --> H{Execute Tx & Update L2 State};
-        H --> I[op-proposer calculates new State Root];
-    end
-    
-    subgraph "L1 GateChain (State Commitment)"
-        I --> J{Proposer submits State Root to L2OutputOracle};
-        J --> K[Fault Challenge Period starts];
-        K --> L((L2 State Change Finalized));
-    end
-
-    E --> G;
-```
+*   **用户提交与 L2 初步处理**: 交易首先由 L2 的 Sequencer 接收并处理，此时状态为 `unsafe`。
+*   **数据批处理与 L1 发布**: `op-batcher` 将多笔交易打包成批，作为 Blob 发布到 GateChain (L1)，交易状态变为 `safe`。
+*   **L1 确认与 L2 最终性**: GateChain 区块确认后，经过 L2 设定的额外等待期，交易达到 `finalized` 状态。
+*   **状态根提案与挑战**: 与此同时，`op-proposer` 会计算新的 L2 状态根并提交至 L1 的 `L2OutputOracle` 合约。
+*   **状态最终承诺**: 该状态根在经过一个故障挑战期且无人成功挑战后，成为 L2 状态的最终承诺，确保了状态变更的最终一致性。

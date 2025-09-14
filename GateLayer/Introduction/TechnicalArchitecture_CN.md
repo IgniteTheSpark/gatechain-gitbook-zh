@@ -2,55 +2,9 @@
 
 ## 高层架构
 
-*请注意：下图是 Mermaid 格式的源码，我们推荐使用您提供的 SVG 矢量图版本以获得最佳显示效果。*
-![GateLayer Architecture](gatelayer-architecture.svg)
+下图展示了 GateLayer 的高层技术架构，涵盖了从用户交互、L2 执行到 L1 结算与数据可用性的完整流程。它清晰地描绘了 Sequencer、Batcher、Proposer 等核心组件如何与 GateChain 上的 Rollup 合约及 Blob 存储协同工作，共同保障系统的安全、高效与可扩展性。
 
-```mermaid
-flowchart TD
-    %% Clients
-    A["Users / Wallets / DApps"] --> B["RPC / JSON-RPC Endpoint"]
-    subgraph L2["GateLayer (OP Stack-based L2)"]
-      B --> C["Sequencer / Executor (EVM)"]
-      C --> D["State DB & Mempool"]
-      C --> E["EIP-1559 Fee Market\n(baseFee + priorityFee)"]
-      C --> F["Logs / Events"]
-      C --> G["Node / Full Node / Archive"]
-      C --> H["Indexer & Explorer"]
-
-      C --> I[Batcher]
-      C --> J[Output Proposer]
-      C --> K["Bridges on L2\n(LayerZero & 生态桥)"]
-
-      style L2 fill:#0b1,stroke:#0b1,color:#fff,fill-opacity:0.08
-    end
-
-    subgraph L1["GateChain (Settlement + DA)"]
-      L["Rollup System Contracts\n(canonical bridge / portal)"]
-      M["Blob DA (stores batch data & state roots)"]
-      N["GT Staking Validators / Consensus"]
-      O["Treasury / Governance"]
-      style L1 fill:#08c,stroke:#08c,color:#fff,fill-opacity:0.08
-    end
-
-    %% Posting & Settlement
-    I --> M
-    J --> L
-    L -. finality window / proofs .- J
-    M --> L
-
-    %% Economic/Security
-    N --> L
-    O --> L
-
-    %% Interop
-    P["External Chains\n(Ethereum / BNB / others)"]
-    K <---> P
-
-    %% Read paths
-    H --> A
-    G --> H
-    F --> H
-```
+![GateLayer 高层技术架构图](./gatelayer-architecture.png)
 
 **图中要点**
 
@@ -60,67 +14,22 @@ flowchart TD
 *   **安全与治理**：结算安全由 **GT 质押 + 验证者网络**提供；治理/金库在 GateChain 侧。
 *   **互操作**：在 L2 侧集成 **LayerZero** 与生态桥，提供跨链资产/消息互通。
 *   **可用性与可观察性**：节点、索引、浏览器在 L2，读取 Blob/合约信息以实现可验证与回溯。
+*   **EVM 兼容性与开发者体验**: GateLayer 内核采用 EVM 执行引擎，与以太坊完全兼容。开发者可以无缝迁移 DApp 并使用 Hardhat、Remix 等标准工具链。
+*   **模块化组件**: 架构分离了核心组件：**Sequencer** 负责交易排序，**Batcher** 负责数据打包，**Proposer** 负责状态根提案，提升了系统的可维护性。
+*   **统一交互入口**: 所有链上交互均通过标准的 **RPC 端点**进入，为用户和开发者提供了与以太坊一致的交互体验。
 
 ---
 
 ## 交易与结算流程
 
-*请注意：下图是 Mermaid 格式的源码，我们推荐使用您提供的 SVG 矢量图版本以获得最佳显示效果。*
-![Rollup Lifecycle](rollup-lifecycle.svg)
+本图通过时序图的形式，详细展示了一笔 L2 交易从提交到最终确认的全过程。它揭示了用户、Sequencer、Batcher、Proposer 以及 GateChain (L1) 之间的交互顺序，帮助理解交易状态如何从 `unsafe` 演变为 `finalized`。
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant U as User / DApp
-    participant S as GateLayer Sequencer(EVM)
-    participant B as Batcher
-    participant P as Output Proposer
-    participant GC as GateChain (Rollup Contracts + Blob)
-
-    U->>S: Submit L2 tx (gas = baseFee + priorityFee)
-    S->>S: Execute txs, build L2 block, update state root
-    S->>U: Return receipt / near-instant confirmation
-
-    S->>B: Send batch data (txs, traces, roots)
-    B->>GC: Post batch data to Blob (DA)
-
-    P->>GC: Post output root / state root to rollup contracts
-    Note over GC: Finality window / challenge period (per config)
-
-    GC-->>U: Finalized status (withdrawals / messages can be proved)
-```
+![Rollup 生命周期](./rollup-lifecycle.png)
 
 ---
 
 ## 组件交互图
 
-*请注意：为保证最佳显示效果，建议使用下方 SVG 版本。*
-![GateLayer Component Interaction](gatelayer-component-interaction.svg)
+此图聚焦于 GateLayer 生态中不同角色（用户、节点、Sequencer、Challenger）与 L1、L2 之间的核心交互关系。它简化了内部复杂性，重点突出了数据流和职责划分，例如用户如何提交交易、Sequencer 如何向 L1 提交数据，以及节点如何从 L1 同步信息。
 
-<details>
-<summary>Mermaid 源码</summary>
-
-```mermaid
-graph TD
-    subgraph "Layer 1"
-        L1_Chain["GateChain (Data Availability Layer)"]
-    end
-
-    subgraph "Layer 2"
-        Challengers
-        Nodes
-        Users
-        Sequencers
-    end
-
-    %% L2 Internal Flows
-    Users -- "Submit transactions<br/>Query data (e.g. block explorers)" --> Nodes
-    Nodes -- "P2P Realtime Updates" --> Sequencers
-    
-    %% L2 <--> L1 Flows
-    Users -- "Submit deposits" --> L1_Chain
-    Sequencers -- "Submit batches and assertions" --> L1_Chain
-    Nodes -- "Get safe transactions<br/>and blocks" --> L1_Chain
-    Challengers -- "Verify block hash assertions<br/>Submit fault proofs" --> L1_Chain
-```
-</details>
+![GateLayer 组件交互](./gatelayer-component-interaction.png)

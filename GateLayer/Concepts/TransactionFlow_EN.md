@@ -45,29 +45,12 @@ This proposal does not take effect immediately. It must pass through a **fault c
 
 ### Gate Layer Transaction Lifecycle
 
-```mermaid
-graph LR
-    subgraph "L2 Sequencer / Batcher"
-        A[User submits Tx] --> B{"Sequencer processes Tx<br/>(State: unsafe)"};
-        B --> C[op-batcher collects & compresses Txs];
-    end
+![Gate Layer Transaction Lifecycle](./gatelayer-transaction-lifecycle.png)
 
-    subgraph "L1 GateChain (Data & Consensus)"
-        C --> D{op-batcher posts Tx data as Blob};
-        D --> E["L1 Block includes Blob<br/>(State: safe)"];
-        E --> F((L1 Block Finalized<br/>State: finalized));
-    end
+**Key Points of the Diagram**
 
-    subgraph "L2 State & Proposer"
-        G[L2 Nodes read Blob from L1] --> H{Execute Tx & Update L2 State};
-        H --> I[op-proposer calculates new State Root];
-    end
-    
-    subgraph "L1 GateChain (State Commitment)"
-        I --> J{Proposer submits State Root to L2OutputOracle};
-        J --> K[Fault Challenge Period starts];
-        K --> L((L2 State Change Finalized));
-    end
-
-    E --> G;
-```
+*   **User Submission & L2 Initial Processing**: Transactions are first received and processed by the L2 Sequencer, at which point their state is `unsafe`.
+*   **Data Batching & L1 Posting**: The `op-batcher` collects multiple transactions into a batch and posts it as a Blob to GateChain (L1), transitioning the transaction state to `safe`.
+*   **L1 Confirmation & L2 Finality**: After the GateChain block is confirmed and an additional L2-defined waiting period has passed, the transaction reaches the `finalized` state.
+*   **State Root Proposal & Challenge**: Concurrently, the `op-proposer` calculates the new L2 state root and submits it to the `L2OutputOracle` contract on L1.
+*   **Final State Commitment**: After passing a fault challenge period without a successful challenge, this state root becomes the final commitment to the L2 state, ensuring the final consistency of state changes.

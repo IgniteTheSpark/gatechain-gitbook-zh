@@ -6,7 +6,7 @@
 | :--- | :--- |
 | **Network Name** | GateLayer Testnet |
 | **Description** | A high-performance Layer 2 test network built on GateChain |
-| **RPC URL** | `http://gatelayer-testnet.gatenode.cc` |
+| **RPC URL** | `https://gatelayer-testnet.gatenode.cc` |
 | **Chain ID** | 10087 |
 | **Currency Symbol** | GT (GateToken) |
 | **Block Explorer** | `https://gatescan.org/gatelayer-testnet` |

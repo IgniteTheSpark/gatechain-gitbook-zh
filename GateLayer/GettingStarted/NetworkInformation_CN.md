@@ -6,7 +6,7 @@
 | :--- | :--- |
 | **网络名称** | GateLayer Testnet |
 | **描述** | 基于 GateChain 构建的高性能 Layer 2 测试网络 |
-| **RPC 端点** | `http://gatelayer-testnet.gatenode.cc` |
+| **RPC 端点** | `https://gatelayer-testnet.gatenode.cc` |
 | **链 ID** | 10087 |
 | **货币符号** | GT (GateToken) |
 | **区块浏览器** | `https://gatescan.org/gatelayer-testnet` |

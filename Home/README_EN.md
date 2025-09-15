@@ -1,23 +1,29 @@
 # Gate Blockchain Ecosystem
 
-Gate Group has built a complete blockchain infrastructure system. Through the GateChain mainnet and GateLayer scaling solution, it provides developers and users with high-performance, low-cost, secure, and reliable blockchain services.
+Gate delivers an L1–L2 architecture combining GateChain (L1) and GateLayer (L2): secure settlement and data availability at the base, paired with high-throughput, low-cost execution on top.
 
 ---
 
-### [GateChain](./GateChain/README.md)
+### GateChain
 
-A high-performance mainnet that supports smart contracts, the DeFi ecosystem, and cross-chain interoperability, providing secure and reliable underlying infrastructure for the entire ecosystem.
+A reliability-first L1 that anchors security, settlement, and data availability for the ecosystem.
 
-*   Mainnet
-*   Smart Contracts
-*   Cross-chain
+- EVM compatible with a growing smart contract ecosystem
+- GateMint consensus for stable, fast, instant finality
+- Native Blob (EIP-4844) support to reduce L2 data costs
+- Secured and governed by GT staking
+
+[Open GateChain Docs »](../GateChain/status/README_EN.md)
 
 ---
 
-### [GateLayer](./GateLayer/README.md)
+### GateLayer
 
-A Layer 2 scaling solution based on GateChain, offering ultra-high TPS and extremely low fees, perfectly suited for DeFi, gaming, and NFT applications.
+An OP Stack–based Layer 2, fully compatible with the Ethereum toolchain, designed for high-throughput, low-fee applications.
 
-*   Layer 2
-*   High Performance
-*   Low Fees
+- 5,700+ TPS, ~1s block time, low transaction fees
+- L2 execution fees (EIP-1559) + L1 data fees (Blobs)
+- Native LayerZero integration and ecosystem bridges
+- Ideal for DeFi, gaming, social, and NFT applications
+
+[Open GateLayer Docs »](../GateLayer/Introduction/TechnicalArchitecture_EN.md)

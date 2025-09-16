@@ -1,6 +1,6 @@
 # Gate Blockchain Ecosystem
 
-Gate delivers an L1–L2 architecture combining GateChain (L1) and GateLayer (L2): secure settlement and data availability at the base, paired with high-throughput, low-cost execution on top.
+Gate delivers an L1–L2 architecture combining GateChain (L1) and Gate Layer (L2): secure settlement and data availability at the base, paired with high-throughput, low-cost execution on top.
 
 ---
 
@@ -17,7 +17,7 @@ A reliability-first L1 that anchors security, settlement, and data availability 
 
 ---
 
-### GateLayer
+### Gate Layer
 
 An OP Stack–based Layer 2, fully compatible with the Ethereum toolchain, designed for high-throughput, low-fee applications.
 
@@ -26,4 +26,4 @@ An OP Stack–based Layer 2, fully compatible with the Ethereum toolchain, desig
 - Native LayerZero integration and ecosystem bridges
 - Ideal for DeFi, gaming, social, and NFT applications
 
-[Open GateLayer Docs »](../GateLayer/Introduction/TechnicalArchitecture_EN.md)
+[Open Gate Layer Docs »](../GateLayer/Introduction/TechnicalArchitecture_EN.md)

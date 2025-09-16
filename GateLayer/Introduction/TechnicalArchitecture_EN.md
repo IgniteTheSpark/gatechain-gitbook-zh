@@ -1,10 +1,10 @@
-# GateLayer × GateChain: Technical Architecture
+# Gate Layer × GateChain: Technical Architecture
 
 ## High-Level Architecture
 
-The diagram below illustrates the high-level technical architecture of GateLayer, covering the complete flow from user interaction and L2 execution to L1 settlement and data availability. It clearly depicts how core components like the Sequencer, Batcher, and Proposer work in concert with the Rollup contracts and Blob storage on GateChain to ensure the system's security, efficiency, and scalability.
+The diagram below illustrates the high-level technical architecture of Gate Layer, covering the complete flow from user interaction and L2 execution to L1 settlement and data availability. It clearly depicts how core components like the Sequencer, Batcher, and Proposer work in concert with the Rollup contracts and Blob storage on GateChain to ensure the system's security, efficiency, and scalability.
 
-![GateLayer High-Level Architecture](./gatelayer-architecture.png)
+![Gate Layer High-Level Architecture](./gatelayer-architecture.png)
 
 **Key Points of the Diagram**
 
@@ -14,7 +14,7 @@ The diagram below illustrates the high-level technical architecture of GateLayer
 *   **Security & Governance**: Settlement security is provided by **GT staking + the validator network**; governance and the treasury reside on the GateChain side.
 *   **Interoperability**: **LayerZero** and ecosystem bridges are integrated on the L2 side to enable cross-chain asset and message communication.
 *   **Availability & Observability**: Nodes, indexers, and explorers on L2 read Blob/contract information to ensure verifiability and traceability.
-*   **EVM Compatibility & Developer Experience**: The GateLayer core utilizes the EVM execution engine, ensuring full compatibility with Ethereum. Developers can seamlessly migrate DApps and use standard toolchains like Hardhat and Remix.
+*   **EVM Compatibility & Developer Experience**: The Gate Layer core utilizes the EVM execution engine, ensuring full compatibility with Ethereum. Developers can seamlessly migrate DApps and use standard toolchains like Hardhat and Remix.
 *   **Modular Components**: The architecture separates core components: the **Sequencer** handles transaction ordering, the **Batcher** manages data bundling, and the **Proposer** submits state root proposals, enhancing the system's maintainability.
 *   **Unified Interaction Entrypoint**: All on-chain interactions enter through a standard **RPC endpoint**, providing users and developers with an interaction experience consistent with Ethereum.
 
@@ -30,6 +30,6 @@ This sequence diagram details the entire lifecycle of an L2 transaction, from su
 
 ## Component Interaction Diagram
 
-This diagram focuses on the core interactions between different roles in the GateLayer ecosystem (Users, Nodes, Sequencers, Challengers) and the L1 and L2 layers. It simplifies internal complexities to highlight data flow and the division of responsibilities, such as how users submit transactions, how the Sequencer posts data to L1, and how nodes sync information from L1.
+This diagram focuses on the core interactions between different roles in the Gate Layer ecosystem (Users, Nodes, Sequencers, Challengers) and the L1 and L2 layers. It simplifies internal complexities to highlight data flow and the division of responsibilities, such as how users submit transactions, how the Sequencer posts data to L1, and how nodes sync information from L1.
 
-![GateLayer Component Interaction](./gatelayer-component-interaction.png)
+![Gate Layer Component Interaction](./gatelayer-component-interaction.png)

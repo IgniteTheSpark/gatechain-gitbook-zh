@@ -35,3 +35,40 @@
 | **SystemConfig Impl**               | `0xec6c6d47ec88f474bffa4defd38930fb2e79084c` |
 | **L1ERC721Bridge Impl**             | `0x7ae1d3bd877a4c5ca257404ce26be93a02c98013` |
 | **OptimismMintableERC20Factory Impl** | `0x5493f4677a186f64805fe7317d6993ba4863988f` |
+
+---
+
+## 与 OP Stack 对齐：建议补充的清单（对标 opBNB 等）
+
+基于 OP Stack 架构，除上述 L1 核心合约外，通常还会包含以下组件（部分为 L1 合约/账户，部分为 L2 预部署系统合约）。考虑到网络尚未完全上线，以下地址以“待公布 (TBD)”或“依系统参数推导”为占位，待主网/测试网发布后更新。
+
+### 1) 其他 L1 合约 / 账户（建议补充）
+
+| 名称 | 地址 | 说明 |
+| --- | --- | --- |
+| **ProtocolVersions** | TBD | 管理协议版本与兼容性门控，用于治理与组件版本约束（新版本 OP Stack 常见）。 |
+| **BatchInbox（批次收件账户）** | 由 `SystemConfig.batcherHash` 推导 | Batcher 在 L1 发布交易批次/Blobs 的目标账户，通常为账户而非合约，用于数据可用性锚定。 |
+
+> 说明：不同 OP Stack 版本（含故障证明演进）在 L1 侧还可能出现 `OptimismPortal2`、或与挑战/争议游戏相关的扩展合约，后续按 GateLayer 实际落地版本补充。
+
+### 2) L2 核心与预部署系统合约（建议新增一节列出）
+
+| 合约名称 | 预期地址/占位 | 简介 |
+| --- | --- | --- |
+| **L2CrossDomainMessenger** | 预部署（默认固定地址，待确认） | L2 ↔ L1 跨域消息通道在 L2 侧的对应端。 |
+| **L2StandardBridge** | 预部署（默认固定地址，待确认） | 标准资产跨链桥的 L2 端。 |
+| **L2ERC721Bridge** | 预部署（默认固定地址，待确认） | ERC721 NFT 跨链桥的 L2 端。 |
+| **OptimismMintableERC20Factory (L2)** | 预部署（默认固定地址，待确认） | 为存款资产在 L2 上创建可铸造镜像代币。 |
+| **L2ToL1MessagePasser** | 预部署（默认固定地址，待确认） | L2 → L1 消息/提款的消息通道基础设施。 |
+| **GasPriceOracle** | 预部署（默认固定地址，待确认） | 提供 L2 费用参数（如 baseFee、overhead/scalar 等）的只读接口。 |
+| **SequencerFeeVault** | 预部署（默认固定地址，待确认） | 存放 Sequencer 收取的 L2 费用收入。 |
+
+> 注：OP Stack Bedrock 起，以上多为“预部署（predeploy）”，地址通常使用 `0x4200…` 前缀的固定值（若 GateLayer 未自定义，则与上游一致）。为避免误导，这里暂以“预部署（待确认）”占位，待网络发布后统一更新为确切地址。
+
+---
+
+## 后续维护建议
+
+- 网络发布/升级后，将本页地址分为：`L1 合约`、`L2 预部署`、`实现合约（Implementation）` 三个小节逐项更新；并在每次重大升级（例如故障证明/挑战机制版本更迭）后同步维护。
+- 在 `SystemConfig` 变更（如 batcher/sequencer/proposer 身份或参数）后，及时更新由其推导得到的账户/地址说明（如 BatchInbox）。
+- 为方便开发者自助校验，可在文末附“检验脚本示例”（如通过 JSON-RPC 读取预部署合约代码哈希、读取 `SystemConfig` 参数等）。

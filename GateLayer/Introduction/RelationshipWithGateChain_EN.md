@@ -2,10 +2,10 @@
 
 ## Fees and Economic Flow
 
-Transaction fees on GateLayer are designed as a sum of two components to accurately reflect the cost of execution on L2 and data storage on L1.
+Transaction fees on Gate Layer are designed as a sum of two components to accurately reflect the cost of execution on L2 and data storage on L1.
 
 *   **L2 Execution Fee**:
-    *   This fee covers the computational resources required to execute a transaction in the GateLayer EVM.
+    *   This fee covers the computational resources required to execute a transaction in the Gate Layer EVM.
     *   It follows the standard **EIP-1559 model**, consisting of a `baseFee` and a `priorityFee`. This portion is the primary revenue for the Sequencer.
 
 *   **L1 Data Fee**:

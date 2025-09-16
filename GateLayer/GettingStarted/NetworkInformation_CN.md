@@ -4,7 +4,7 @@
 
 | 名称 | 值 |
 | :--- | :--- |
-| **网络名称** | GateLayer Testnet |
+| **网络名称** | Gate Layer Testnet |
 | **描述** | 基于 GateChain 构建的高性能 Layer 2 测试网络 |
 | **RPC 端点** | `https://gatelayer-testnet.gatenode.cc` |
 | **链 ID** | 10087 |
@@ -16,7 +16,7 @@
 
 | 名称 | 值 |
 | :--- | :--- |
-| **网络名称** | GateLayer Mainnet |
+| **网络名称** | Gate Layer Mainnet |
 | **描述** | 基于 GateChain 构建的高性能 Layer 2 主网络 |
 | **RPC 端点** | 待定 |
 | **链 ID** | 待定 |

@@ -1,8 +1,8 @@
-# GateLayer 与 GateChain 的关系
+# Gate Layer 与 GateChain 的关系
 
 ## 职责分工
 
-*   **GateLayer（L2 执行层）**：
+*   **Gate Layer（L2 执行层）**：
     *   基于 **OP Stack** 的 **EVM 执行环境**与 **Sequencer**；
     *   负责**快速、低费**的交易处理与应用部署；
     *   通过 **Batcher/Proposer** 把批次与**状态根**提交到 GateChain；
@@ -15,15 +15,15 @@
 
 ## 安全与最终性
 
-*   L2 的交易在 GateLayer 上**先快确认**；最终性以 GateChain 的 **rollup 合约确认**为准。
+*   L2 的交易在 Gate Layer 上**先快确认**；最终性以 GateChain 的 **rollup 合约确认**为准。
 *   GateChain 的 **GT 质押/验证者**与共识，提供**结算安全**与**数据可用性**保障。
 
 ## 费用与经济流
 
-GateLayer 上的交易费用被设计为两部分的总和，以准确反映其在 L2 上的执行成本和在 L1 上的数据存储成本。
+Gate Layer 上的交易费用被设计为两部分的总和，以准确反映其在 L2 上的执行成本和在 L1 上的数据存储成本。
 
 *   **L2 执行费 (Execution Fee)**：
-    *   这部分费用用于支付在 GateLayer EVM 中执行交易所需的计算资源。
+    *   这部分费用用于支付在 Gate Layer EVM 中执行交易所需的计算资源。
     *   它遵循标准的 **EIP-1559 模型**，由 `基础费 (baseFee)` 和 `优先费 (priorityFee)` 组成。这部分费用是 Sequencer 的主要收入来源。
 
 *   **L1 数据费 (Data Fee)**：

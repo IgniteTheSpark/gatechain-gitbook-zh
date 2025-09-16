@@ -4,7 +4,7 @@
 
 | Name | Value |
 | :--- | :--- |
-| **Network Name** | GateLayer Testnet |
+| **Network Name** | Gate Layer Testnet |
 | **Description** | A high-performance Layer 2 test network built on GateChain |
 | **RPC URL** | `https://gatelayer-testnet.gatenode.cc` |
 | **Chain ID** | 10087 |
@@ -16,7 +16,7 @@
 
 | Name | Value |
 | :--- | :--- |
-| **Network Name** | GateLayer Mainnet |
+| **Network Name** | Gate Layer Mainnet |
 | **Description** | A high-performance Layer 2 main network built on GateChain |
 | **RPC URL** | TBD |
 | **Chain ID** | TBD |

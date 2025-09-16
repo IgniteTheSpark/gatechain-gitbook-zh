@@ -50,7 +50,7 @@
     * ## 状态更新
         * [更新日志](GateChain/status/README.md)
 
-* [GateLayer](GateLayer/README.md)
+* [Gate Layer](GateLayer/README.md)
     * [简介](GateLayer/Introduction/Introduction_CN.md)
         * [与 GateChain 的关系](GateLayer/Introduction/RelationshipWithGateChain_CN.md)
         * [技术架构](GateLayer/Introduction/TechnicalArchitecture_CN.md)
@@ -68,6 +68,8 @@
         * [部署智能合约](GateLayer/Development/DeployContract_CN.md)
         * [验证智能合约](GateLayer/Development/VerifyContract_CN.md)
         * [协议合约地址](GateLayer/Development/ProtocolContracts_CN.md)
+        * [运行 L2 RPC 节点](GateLayer/Development/RunRPCNode_CN.md)
+        * [Run L2 RPC Node](GateLayer/Development/RunRPCNode_EN.md)
         * [Endpoints & API](GateLayer/Development/EndpointsAPI_CN.md)
         * [资源](GateLayer/Development/Resources/Bridges_CN.md)
             * [区块浏览器](GateLayer/Development/Resources/BlockExplorer_CN.md)

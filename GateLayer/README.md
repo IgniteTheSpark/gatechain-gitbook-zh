@@ -1,5 +1,5 @@
-# GateLayer
+# Gate Layer
 
-Welcome to the GateLayer documentation.
+Welcome to the Gate Layer documentation.
 
 

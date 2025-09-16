@@ -1,4 +1,4 @@
-# Gate Layer L2 RPC Node Deployment (Developers)
+# Gate Layer RPC Node Deployment
 
 > Note: This guide is based on the current testnet setup. For production, follow the actual network release notes and parameters.
 

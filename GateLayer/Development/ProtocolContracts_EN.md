@@ -1,12 +1,12 @@
 # Protocol Contracts
 
-This document lists the core protocol smart contract addresses deployed on GateChain (L1) for the Gate Layer system. These contracts collectively form the foundation of the Gate Layer network.
+This document aggregates Gate Layer system contracts across GateChain (L1) and Gate Layer (L2). For clarity, items are separated into Testnet, Mainnet (placeholders), and common L2 predeploys.
 
 ---
 
-## Core L1 Contracts
+## Testnet · Core L1 Contracts
 
-These are the primary contracts directly related to the functionality of Gate Layer.
+These are the primary contracts currently deployed on the testnet.
 
 | Contract Name                  | Address                                    | Description                                                                 |
 | ------------------------------ | ------------------------------------------ | --------------------------------------------------------------------------- |
@@ -22,7 +22,7 @@ These are the primary contracts directly related to the functionality of Gate La
 
 ---
 
-## Implementation Contracts
+## Testnet · Implementation Contracts
 
 The following are the logic implementation addresses that the proxy contracts listed above currently point to. These addresses may change with protocol upgrades.
 
@@ -35,3 +35,57 @@ The following are the logic implementation addresses that the proxy contracts li
 | **SystemConfig Impl**               | `0xec6c6d47ec88f474bffa4defd38930fb2e79084c`     |
 | **L1ERC721Bridge Impl**             | `0x7ae1d3bd877a4c5ca257404ce26be93a02c98013`     |
 | **OptimismMintableERC20Factory Impl** | `0x5493f4677a186f64805fe7317d6993ba4863988f`     |
+
+---
+
+## Mainnet (Placeholders) · Implementation Contracts
+
+To be populated after mainnet launch; placeholders are kept to align structure.
+
+| Contract Name | Implementation Address |
+| --- | --- |
+| **L1StandardBridge Impl** | TBD |
+| **L1CrossDomainMessenger Impl** | TBD |
+| **OptimismPortal Impl** | TBD |
+| **DisputeGameFactory Impl** | TBD |
+| **SystemConfig Impl** | TBD |
+| **L1ERC721Bridge Impl** | TBD |
+| **OptimismMintableERC20Factory Impl** | TBD |
+
+---
+
+## Testnet · L2 Predeploy Contracts (Standard Fixed Addresses)
+
+| Contract Name | Address | Description |
+| --- | --- | --- |
+| **L2CrossDomainMessenger** | `0x4200000000000000000000000000000000000007` | L2-side cross-domain messenger paired with L1 XDM. |
+| **L2StandardBridge** | `0x4200000000000000000000000000000000000010` | L2 side of the standard asset bridge (ETH/ERC20). |
+| **L2ToL1MessagePasser** | `0x4200000000000000000000000000000000000016` | Low-level channel/record for L2→L1 withdrawals/messages. |
+| **L1Block** | `0x4200000000000000000000000000000000000015` | Provides L1 block info and base fee readings (read-only). |
+| **GasPriceOracle** | `0x420000000000000000000000000000000000000F` | L2 fee oracle interface (baseFee, overhead/scalar, etc.). |
+| **L2ERC721Bridge** | `0x4200000000000000000000000000000000000014` | L2 ERC721 bridge. |
+| **OptimismMintableERC20Factory (L2)** | `0x4200000000000000000000000000000000000012` | Creates mintable mirror tokens for deposited assets on L2. |
+| **SequencerFeeVault** | `0x4200000000000000000000000000000000000011` | Sequencer fee vault. |
+| **BaseFeeVault** | `0x4200000000000000000000000000000000000019` | Base fee vault. |
+| **L1FeeVault** | `0x420000000000000000000000000000000000001A` | L1 fee vault. |
+| **OperatorFeeVault** | `0x420000000000000000000000000000000000001B` | Operator fee vault. |
+| **ProxyAdmin** | `0x4200000000000000000000000000000000000018` | Proxy admin (upgrade management). |
+
+## Mainnet · L2 Predeploy Contracts (Standard Fixed Addresses)
+
+Currently identical to testnet; if customized later, this section will be updated.
+
+| Contract Name | Address | Description |
+| --- | --- | --- |
+| **L2CrossDomainMessenger** | `0x4200000000000000000000000000000000000007` | L2-side cross-domain messenger paired with L1 XDM. |
+| **L2StandardBridge** | `0x4200000000000000000000000000000000000010` | L2 side of the standard asset bridge (ETH/ERC20). |
+| **L2ToL1MessagePasser** | `0x4200000000000000000000000000000000000016` | Low-level channel/record for L2→L1 withdrawals/messages. |
+| **L1Block** | `0x4200000000000000000000000000000000000015` | Provides L1 block info and base fee readings (read-only). |
+| **GasPriceOracle** | `0x420000000000000000000000000000000000000F` | L2 fee oracle interface (baseFee, overhead/scalar, etc.). |
+| **L2ERC721Bridge** | `0x4200000000000000000000000000000000000014` | L2 ERC721 bridge. |
+| **OptimismMintableERC20Factory (L2)** | `0x4200000000000000000000000000000000000012` | Creates mintable mirror tokens for deposited assets on L2. |
+| **SequencerFeeVault** | `0x4200000000000000000000000000000000000011` | Sequencer fee vault. |
+| **BaseFeeVault** | `0x4200000000000000000000000000000000000019` | Base fee vault. |
+| **L1FeeVault** | `0x420000000000000000000000000000000000001A` | L1 fee vault. |
+| **OperatorFeeVault** | `0x420000000000000000000000000000000000001B` | Operator fee vault. |
+| **ProxyAdmin** | `0x4200000000000000000000000000000000000018` | Proxy admin (upgrade management). |
